@@ -43,6 +43,10 @@ This is the Code Institute student template for Gitpod.
 [User Stories Boutique Ado 1/2]! (assets/images/user-stories-boutique-ado-1.png)
 [User Stories Boutique Ado 2/2]! (assets/images/user-stories-boutique-ado-2.png)
 
+## Order of user stories:
+
+1. Registration & User Accounts
+
 ## Gitpod Reminders
 
 To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
