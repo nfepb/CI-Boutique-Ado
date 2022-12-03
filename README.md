@@ -1,6 +1,6 @@
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-Welcome USER_NAME,
+Welcome nfepb,
 
 This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
 
@@ -9,8 +9,38 @@ You can safely delete this README.md file, or change it for your own project. Pl
 # Questions to ask when building eCommerce website:
 
 1. Which ecommerce app types apply to this website? 
+    * **B2C** focus, **Products** are being sold by the organisation, requires **Single Payment**
 2. With the ecommerce types in mind, what kind of features might be included within the business website? 
+    * Easy payment gateway
+    * Authentification system 
+        * for creating an account
+        * for logging in / out
+        * seeing previous purchases
+    * Search and filter functionalities
+    * Clear product descriptions
+    * Ratings or reviews
+    * Shopping cart and payment system
 3. What tables of data would your database need, and what data might be included in these tables? 
+    * **User**
+        * username
+        * email
+        * password
+    * **Product**
+        * name
+        * image
+        * price
+        * description
+        * rating
+        * category
+    * **Order**
+        * User [FK User]
+        * total
+        * full_name
+        * address
+    * **OrderItem**
+        * Order [FK Order]
+        * Product [FK Product]
+        * quantity
 
 ## Gitpod Reminders
 
