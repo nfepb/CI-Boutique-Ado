@@ -6,6 +6,12 @@ This is the Code Institute student template for Gitpod. We have preinstalled all
 
 You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
 
+# Questions to ask when building eCommerce website:
+
+1. Which ecommerce app types apply to this website? 
+2. With the ecommerce types in mind, what kind of features might be included within the business website? 
+3. What tables of data would your database need, and what data might be included in these tables? 
+
 ## Gitpod Reminders
 
 To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
