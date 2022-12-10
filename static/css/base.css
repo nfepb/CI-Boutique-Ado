@@ -8,7 +8,7 @@ body {
     /* Height is calculation of total height - height navbar */
     height: calc(100vh - 164px);
     color: #555;
-    font-family: 'Lato';
+    font-family: 'Lato', sans-serif;
 }
 
 /* from Bulma */
@@ -24,6 +24,7 @@ body {
     text-transform: uppercase;
 }
 
+/* Logo take as much space as the text requires */
 .main-logo-link {
     width: fit-content;
 }
