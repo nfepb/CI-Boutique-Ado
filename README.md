@@ -47,6 +47,14 @@ This is the Code Institute student template for Gitpod.
 
 1. Registration & User Accounts
 
+# Deployment
+Django `startproject boutique_ado` steps
+Copy Allauth files in directory templates with command `cp -r /workspace/.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth`
+Deleting OpenId & tests files with templates because not handled in this project. This sets them back to their Allauth defaults.
+Manually create a project level base.html template directory, out of which all templates will be based on.
+Uses the boilerplate from the Bootstrap website in the base.html. 
+
+
 ## Gitpod Reminders
 
 To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
