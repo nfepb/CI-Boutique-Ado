@@ -79,7 +79,7 @@
         </div>
         <!-- Search form  -->
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-          <form action="" method="get">
+          <form action="#" method="get">
             <div class="input-group w-100">
               <input
                 class="form-control border border-black rounded-0"
@@ -163,20 +163,38 @@
             class="navbar-toggler"
             type="button"
             data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
+            data-target="#main-nav"
+            aria-controls="main-nav"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <span class="navbar-toggler-icon"></span>
           </button>
+          <!-- prettier-ignore -->
+          {% include 'includes/mobile-top-header.html' %}
+          {% include 'includes/main-nav.html' %}
         </nav>
       </div>
     </header>
 
     <!-- Message area  -->
     {% if messages %}
-    <div class="message-container"></div>
+    <div class="message-container">
+      <!-- prettier-ignore -->
+      {% for message in messages %}
+        {% with message.level as level %}
+            {% if level == 40 %}
+                {% include 'includes/toasts/toast_error.html' %}
+            {% elif level == 30 %}
+                {% include 'includes/toasts/toast_warning.html' %}
+            {% elif level == 25 %}
+                {% include 'includes/toasts/toast_success.html' %}
+            {% else %}
+                {% include 'includes/toasts/toast_info.html' %}
+            {% endif %}
+        {% endwith %}
+      {% endfor %}
+    </div>
     {% endif %}
 
     <!-- prettier-ignore -->
@@ -189,6 +207,9 @@
 
     <!-- prettier-ignore -->
     {% block postloadjs %}
+    <script type="text/javascript">
+      $(".toast").toast("show");
+    </script>
     {% endblock %}
   </body>
 </html>
