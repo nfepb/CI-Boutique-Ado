@@ -54,8 +54,44 @@
     <title>Boutique Ado {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
-    <header class="container-fluid fixed-top"></header>
+    <!-- Header -->
+    <header class="container-fluid fixed-top">
+      <div class="row">
+        <div
+          class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left"
+        >
+          <a href="(% url 'home' %)" class="nav-link main-logo-link">
+            <h2 class="logo-font text-black my-0">
+              <strong>Boutique</strong> Ado
+            </h2>
+          </a>
+        </div>
+        <!-- Search form  -->
+        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+          <form action="" method="get">
+            <div class="input-group w-100">
+              <input
+                class="form-control border border-black rounded-0"
+                type="text"
+                name="q"
+                placeholder="Search..."
+              />
+              <div class="input-group-append">
+                <button
+                  type="submit"
+                  class="form-control btn btn-black border border-blavk rounded-0"
+                >
+                  <span class="icon"><i class="fas fa-search"></i></span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0"></div>
+      </div>
+    </header>
 
+    <!-- Message area  -->
     {% if messages %}
     <div class="message-container"></div>
     {% endif %}
