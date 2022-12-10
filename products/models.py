@@ -13,6 +13,9 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    """
+    Name, Description, & Price are required, the rest is optional
+    """
     category = models.ForeignKey(
         'Category', null=True, blank=True, on_delete=models.SET_NULL
         )
