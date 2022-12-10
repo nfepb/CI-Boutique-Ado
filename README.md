@@ -46,6 +46,7 @@ This is the Code Institute student template for Gitpod.
 ## Order of user stories:
 
 1. Registration & User Accounts
+2. Viewing & navigation (navbar)
 
 # Deployment
 Django `startproject boutique_ado` steps
