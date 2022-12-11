@@ -12,7 +12,7 @@ def all_products(request):
 
     products = Product.objects.all()
     query = None
-    category = None
+    categories = None
 
     """
     To match term in either product name or description through queries
