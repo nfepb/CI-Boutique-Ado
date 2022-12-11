@@ -51,7 +51,17 @@
                   <p class="lead mb-0 text-left font-weight-bold">
                     ${{ product.price }}
                   </p>
-                  {% if product.rating %}
+                  {% if product.category %}
+                  <p class="small mt-1 mb-0">
+                    <a
+                      href="{% url 'products' %}?category={{ product.category.name }}"
+                      class="text-muted"
+                      ><i class="fas fa-tag mr-1"></i>
+                      <!-- prettier-ignore -->
+                      {{ product.category.friendly_name }}</a
+                    >
+                  </p>
+                  {% endif %} {% if product.rating %}
                   <small class="text-muted"
                     ><i class="fas fa-star mr-1"></i>{{ product.rating }} /
                     5</small
