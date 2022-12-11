@@ -47,6 +47,8 @@ This is the Code Institute student template for Gitpod.
 
 1. Registration & User Accounts
 2. Viewing & navigation (navbar)
+3. Mock product and images data with JSON files + images
+3. Admin views for product and category management
 
 # Deployment
 Django `startproject boutique_ado` steps
