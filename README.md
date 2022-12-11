@@ -54,6 +54,9 @@ This is the Code Institute student template for Gitpod.
     * Create product_detail view in app
 7. View & filter categories + stories # 14 & 15 for the search queries
     * Adds filter to Views
+    * Adds category filtering in url in html
+    * Adds view in all_products def.
+    * Adds sorting for price, rating, etc in main-nav. Adds views
 
 # Deployment
 Django `startproject boutique_ado` steps

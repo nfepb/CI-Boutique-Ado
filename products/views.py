@@ -13,12 +13,30 @@ def all_products(request):
     products = Product.objects.all()
     query = None
     categories = None
+    sort = None
+    direction = None
+    current_sorting = None
 
     """
     To match term in either product name or description through queries
     """
 
     if request.GET:
+        # To sort the products based on class fields:
+        if 'sort' in request.GET:
+
+            sortkey = request.GET['sort']
+            sort = sortkey
+            if sortkey == 'name':
+                sortkey = 'lower_name'
+                products = products.annotate(lower_name=Lower('name'))
+
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            products = products.order_by(sortkey)
+
         # To capture the category parameter through foreign key thanks to "__":
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
@@ -37,11 +55,14 @@ def all_products(request):
                 )
             products = products.filter(queries)
 
+    current_sorting = f'{sort}_{direction}'
+
     # Context is needed because we send something back to the template
     context = {
         'products': products,
         'search_term': query,
         'current_categories': categories,
+        'current_sorting': current_sorting,
     }
     return render(request, 'products/products.html', context)
 
