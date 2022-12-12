@@ -63,6 +63,7 @@ This is the Code Institute student template for Gitpod.
     * Add templates & bag folders & bag html
     * Add app to installed apps + to urls.py of project
     * update bag.html
+    * Adds form to product_detail
 
 # Deployment
 Django `startproject boutique_ado` steps
