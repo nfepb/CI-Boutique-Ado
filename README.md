@@ -57,6 +57,12 @@ This is the Code Institute student template for Gitpod.
     * Adds category filtering in url in html
     * Adds view in all_products def.
     * Adds sorting for price, rating, etc in main-nav. Adds views
+8. Create bag app
+    * Add url file
+    * Add view
+    * Add templates & bag folders & bag html
+    * Add app to installed apps + to urls.py of project
+    * update bag.html
 
 # Deployment
 Django `startproject boutique_ado` steps
