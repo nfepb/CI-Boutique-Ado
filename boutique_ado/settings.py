@@ -75,7 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # Makes the bag contents available through all the site
+                # Makes the bag contents available through all the site. Acts as view
                 'bag.contexts.bag_contents',
             ],
         },
