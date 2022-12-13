@@ -21,11 +21,11 @@ def bag_contents(request):
         product = get_object_or_404(Product, pk=item_id)
         total += quantity * product.price
         product_count += quantity
+        """
+        Adds dictionnary to list of bag items to give access to
+        other fields when iterating through itesmmseg. image)
+        """
         bag_items.append({
-            """
-            Adds dictionnary to list of bag items to give access to
-            other fields when iterating through itesmmseg. image)
-            """
             'item_id': item_id,
             'quantity': quantity,
             'product': product,
