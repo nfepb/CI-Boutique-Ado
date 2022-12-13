@@ -65,6 +65,7 @@ This is the Code Institute student template for Gitpod.
     * update bag.html
     * Adds form to product_detail
     * display total cost on navbar icon
+    * Adds size to product model and displays on details + bag pages
 
 # Deployment
 Django `startproject boutique_ado` steps
