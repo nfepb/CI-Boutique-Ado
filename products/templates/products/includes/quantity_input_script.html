@@ -1,0 +1,53 @@
+<!-- Adds script in html file to load as single script at the end of product html page.
+Avoids having to deal with multiple static files. -->
+
+<script type="text/javascript">
+  // Disables +/- buttons outside of 1-99 range
+  function handleEnableDisable(itemId) {
+    let currentValue = parseInt($(`#id_qty_${itemId}`).val());
+    let minusDisabled = currentValue < 2;
+    let plusDisabled = currentValue > 98;
+    $(`#decrement-qty_${itemId}`).prop("disabled", minusDisabled);
+    $(`#increment-qty_${itemId}`).prop("disabled", plusDisabled);
+  }
+
+  // Ensures proper enabling/disabling of all inputs on page load
+  let allQtyInputs = $(`.qty_input`);
+  for (var i = 0; i < allQtyInputs.length; i++) {
+    let itemId = $(allQtyInputs[i]).data("item_id");
+    handleEnableDisable(itemId);
+  }
+
+  // Checks enable/disable everyt ime the input is changed
+  $(`qty_input`).change(function () {
+    let itemId = $(this).data("item_id");
+    handleEnableDisable(itemId);
+  });
+
+  // Increment quantity of item in bag
+  // Disables default button action
+  $(".increment-qty").click(function (e) {
+    e.preventDefault();
+    // Closest method searches through the DOM, find method searches down.
+    // From the button element, go up the tree to the closest input class
+    let closestInput = $(this).closest(".input-group").find(".qty_input")[0];
+    // Cache the value in the input
+    let currentValue = parseInt($(closestInput).val());
+    $(closestInput).val(currentValue + 1);
+    let itemId = $(this).data("item_id");
+    handleEnableDisable(itemId);
+  });
+  // Decreases quantity of item in bag
+  //   Disables default button action
+  $(".decrement-qty").click(function (e) {
+    e.preventDefault();
+    // Closest method searches through the DOM, find method searches down.
+    // From the button element, go up the tree to the closest input class
+    let closestInput = $(this).closest(".input-group").find(".qty_input")[0];
+    // Cache the value in the input
+    let currentValue = parseInt($(closestInput).val());
+    $(closestInput).val(currentValue - 1);
+    let itemId = $(this).data("item_id");
+    handleEnableDisable(itemId);
+  });
+</script>
