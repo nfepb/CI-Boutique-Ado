@@ -58,7 +58,11 @@
               <p class="my-0">{{ item.product.price }}</p>
             </td>
             <td class="py-3 w-25">
-              <form action="" method="post" class="form update-form">
+              <form
+                action="{% url 'adjust_bag' item.item_id %}"
+                method="post"
+                class="form update-form"
+              >
                 {% csrf_token %}
                 <div class="form-group">
                   <div class="input-group">
@@ -171,8 +175,8 @@
 
 <script type="text/javascript">
   // Update qty on click
-  $(`.update-link`).click(function (e) {
-    let form = $(this).prev(`.input-form`);
+  $(".update-link").click(function (e) {
+    var form = $(this).prev(".update-form");
     form.submit();
   });
 
@@ -184,7 +188,10 @@
     let size = $(this).data("size");
     let url = `/bag/remove/${itemId}`;
     // Match the CSRF token expected by Django to request.post to server
-    let data = { csrfmiddlewaretoken: csrfToken, size: size };
+    let data = {
+      csrfmiddlewaretoken: csrfToken,
+      size: size,
+    };
 
     $.post(url, data).done(function () {
       location.reload();
