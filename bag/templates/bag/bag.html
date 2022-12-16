@@ -1,14 +1,12 @@
-{% extends "base.html" %} {% load static %}
-
+{% extends "base.html" %} {% load static %} {% load bag_tools %}
 <!-- prettier-ignore -->
 {% block page_header %}
 <div class="container header-container">
-  <div class="row"><div class="col"></div></div>
+  <div class="row">
+    <div class="col"></div>
+  </div>
 </div>
-{% endblock %}
-
-<!-- prettier-ignore -->
-{% block content %}
+{% endblock %} {% block content %}
 <div class="overlay"></div>
 <div class="container mb-2">
   <div class="row">
@@ -38,9 +36,8 @@
           <tr>
             <td class="p-3 w-25">
               <img
-                src="{{ item.product.image.url }}"
-                alt="Image for {{ item.product.name }}"
                 class="img-fluid rounded"
+                src="{{ item.product.image.url }}"
               />
             </td>
             <td class="py-3">
@@ -55,13 +52,13 @@
               </p>
             </td>
             <td class="py-3">
-              <p class="my-0">{{ item.product.price }}</p>
+              <p class="my-0">${{ item.product.price }}</p>
             </td>
             <td class="py-3 w-25">
               <form
-                action="{% url 'adjust_bag' item.item_id %}"
-                method="post"
                 class="form update-form"
+                method="POST"
+                action="{% url 'adjust_bag' item.item_id %}"
               >
                 {% csrf_token %}
                 <div class="form-group">
@@ -72,7 +69,9 @@
                         data-item_id="{{ item.item_id }}"
                         id="decrement-qty_{{ item.item_id }}"
                       >
-                        <span><i class="fas fa-minus fa-sm"></i></span>
+                        <span>
+                          <i class="fas fa-minus fa-sm"></i>
+                        </span>
                       </button>
                     </div>
                     <input
@@ -91,7 +90,9 @@
                         data-item_id="{{ item.item_id }}"
                         id="increment-qty_{{ item.item_id }}"
                       >
-                        <span><i class="fas fa-plus fa-sm"></i></span>
+                        <span>
+                          <i class="fas fa-plus fa-sm"></i>
+                        </span>
                       </button>
                     </div>
                     {% if item.product.has_sizes %}
@@ -99,24 +100,26 @@
                       type="hidden"
                       name="product_size"
                       value="{{ item.size }}"
-                    />{% endif %}
+                    />
+                    {% endif %}
                   </div>
                 </div>
               </form>
-              <a href="" class="update-link text-info"><small>Update</small></a>
+              <a class="update-link text-info"><small>Update</small></a>
               <a
-                href=""
                 class="remove-item text-danger float-right"
                 id="remove_{{ item.item_id }}"
+                data-product_size="{{ item.size }}"
                 ><small>Remove</small></a
               >
             </td>
             <td class="py-3">
-              <p class="my-0">{{ item.product.name }}</p>
+              <p class="my-0">
+                ${{ item.product.price | calc_subtotal:item.quantity }}
+              </p>
             </td>
           </tr>
           {% endfor %}
-          <!-- To display total and logic if bag total >= delivery threshold -->
           <tr>
             <td colspan="5" class="pt-5 text-right">
               <h6><strong>Bag Total: ${{ total|floatformat:2 }}</strong></h6>
@@ -157,41 +160,35 @@
       <p class="lead mb-5">Your bag is empty.</p>
       <a
         href="{% url 'products' %}"
-        class="btn btn-outline-black-rounded-0 btn-lg"
+        class="btn btn-outline-black rounded-0 btn-lg"
       >
-        <span class="icon"><i class="fas fa-chevron-left"></i></span>
-        <span class="text-uppercase">Keep Shopping</span></a
-      >
+        <span class="icon">
+          <i class="fas fa-chevron-left"></i>
+        </span>
+        <span class="text-uppercase">Keep Shopping</span>
+      </a>
       {% endif %}
     </div>
   </div>
 </div>
-{% endblock %}
-
+{% endblock %} {% block postloadjs %} {{ block.super }}
 <!-- prettier-ignore -->
-{% block postloadjs %}
-{{ block.super }}
 {% include 'products/includes/quantity_input_script.html' %}
 
 <script type="text/javascript">
-  // Update qty on click
+  // Update quantity on click
   $(".update-link").click(function (e) {
     var form = $(this).prev(".update-form");
     form.submit();
   });
 
   // Remove item and reload on click
-  $(`.remove-link`).click(function (e) {
-    let csrfToken = " {{ csrf_token }}";
-    // Splits the itemId of update link being clicked on and taking 2nd half of it
-    let itemId = $(this).attr("id").split("remove_")[1];
-    let size = $(this).data("size");
-    let url = `/bag/remove/${itemId}`;
-    // Match the CSRF token expected by Django to request.post to server
-    let data = {
-      csrfmiddlewaretoken: csrfToken,
-      size: size,
-    };
+  $(".remove-item").click(function (e) {
+    var csrfToken = "{{ csrf_token }}";
+    var itemId = $(this).attr("id").split("remove_")[1];
+    var size = $(this).data("product_size");
+    var url = `/bag/remove/${itemId}/`;
+    var data = { csrfmiddlewaretoken: csrfToken, product_size: size };
 
     $.post(url, data).done(function () {
       location.reload();
