@@ -71,7 +71,7 @@ def adjust_bag(request, item_id):
             # Remove item if qty = 0
             del bag[item_id]['items_by_size'][size]
             if not bag[item_id]['items_by_size']:
-                bag.pop(item_id)
+                bag.pop[item_id]
     else:
         if quantity > 0:
             """
@@ -80,7 +80,7 @@ def adjust_bag(request, item_id):
             bag[item_id] = quantity
         else:
             # Remove item if qty = 0
-            bag.pop(item_id)
+            bag.pop[item_id]
 
     # Overwrites the variable in the session with updated version
     request.session['bag'] = bag
