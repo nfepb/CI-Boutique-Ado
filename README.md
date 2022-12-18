@@ -40,8 +40,9 @@ This is the Code Institute student template for Gitpod.
 
 # User Stories 
 
-[User Stories Boutique Ado 1/2]! (assets/images/user-stories-boutique-ado-1.png)
-[User Stories Boutique Ado 2/2]! (assets/images/user-stories-boutique-ado-2.png)
+[User Stories Boutique Ado 1/3]! (assets/images/user-stories-boutique-ado-1.png)
+[User Stories Boutique Ado 2/3]! (assets/images/user-stories-boutique-ado-2.png)
+[User Stories Boutique Ado 3/3]! (assets/images/user-stories-boutique-ado-3.png)
 
 ## Order of user stories:
 
@@ -66,6 +67,10 @@ This is the Code Institute student template for Gitpod.
     * Adds form to product_detail
     * display total cost on navbar icon
     * Adds size to product model and displays on details + bag pages
+    * Adds update & remove links on bag page
+    * Adds subtotal calculation
+9. Adds Totast and Django message to communicate with the user
+    * Adds toast folder in templates/includes
 
 # Deployment
 Django `startproject boutique_ado` steps
