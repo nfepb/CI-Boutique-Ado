@@ -75,7 +75,7 @@ This is the Code Institute student template for Gitpod.
     * Adds if logic to base.html
     * Updates views for when messages should be displayed
     * Adds checkout preview
-10. Checkout Page
+10. Checkout Page - User Story 19 --> 22 using Stripe and sending confirmation email.
 
 # Deployment
 Django `startproject boutique_ado` steps
