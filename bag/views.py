@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, HttpResponse
 
 
 def view_bag(request):
@@ -71,7 +71,7 @@ def adjust_bag(request, item_id):
             # Remove item if qty = 0
             del bag[item_id]['items_by_size'][size]
             if not bag[item_id]['items_by_size']:
-                bag.pop[item_id]
+                bag.pop(item_id)
     else:
         if quantity > 0:
             """
@@ -80,7 +80,7 @@ def adjust_bag(request, item_id):
             bag[item_id] = quantity
         else:
             # Remove item if qty = 0
-            bag.pop[item_id]
+            bag.pop(item_id)
 
     # Overwrites the variable in the session with updated version
     request.session['bag'] = bag
@@ -88,9 +88,16 @@ def adjust_bag(request, item_id):
 
 
 def remove_from_bag(request, item_id):
-    """Remove the item from the shopping bag"""
+    """
+    Remove the item from the shopping bag.
+    No qty needed as intended qty is 0.
+    """
 
     try:
+        """
+        If size is in POST, we want to remove item size key
+        in items by size dictionnary.
+        """
         size = None
         if 'product_size' in request.POST:
             size = request.POST['product_size']
@@ -101,10 +108,15 @@ def remove_from_bag(request, item_id):
             if not bag[item_id]['items_by_size']:
                 bag.pop(item_id)
         else:
+            """If the qty is already 0, remove the item_id"""
             bag.pop(item_id)
 
         request.session['bag'] = bag
+        """
+        200 http return because view posted from JS function.
+        """
         return HttpResponse(status=200)
 
     except Exception as e:
+        """Return 500 error in case anything goes wrong."""
         return HttpResponse(status=500)
