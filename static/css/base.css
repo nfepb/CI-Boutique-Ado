@@ -100,9 +100,9 @@ a.category-badge>span.badge:hover {
 }
 
 .btt-link,
-.update_link,
-.update-item {
-    cursor: pointer;
+.update-link,
+.remove-item {
+    cursor: pointer !important;
 }
 
 /* -------------------------------- Media Queries */

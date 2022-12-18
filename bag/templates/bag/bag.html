@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load static %}
+{% extends "base.html" %}{% load static %}{% load bag_tools %}
 
 <!-- prettier-ignore -->
 {% block page_header %}
@@ -112,7 +112,9 @@
               >
             </td>
             <td class="py-3">
-              <p class="my-0">{{ item.product.name }}</p>
+              <p class="my-0">
+                {{ item.product.price | calc_subtotal:item.quantity }}
+              </p>
             </td>
           </tr>
           {% endfor %}
@@ -182,11 +184,11 @@
 
   // Remove item and reload on click
   $(`.remove-item`).click(function (e) {
-    let csrfToken = " {{ csrf_token }}";
+    let csrfToken = "{{ csrf_token }}";
     // Splits the itemId of update link being clicked on and taking 2nd half of it
     let itemId = $(this).attr("id").split("remove_")[1];
     let size = $(this).data("product_size");
-    let url = `/bag/remove/${itemId}`;
+    let url = `/bag/remove/${itemId}/`;
     // Match the CSRF token expected by Django to request.post to server
     let data = {
       // prettier-ignore

@@ -30,7 +30,7 @@ def bag_contents(request):
             """
             bag_items.append({
                 'item_id': item_id,
-                'quantity': quantity,
+                'quantity': item_data,
                 'product': product,
             })
         # If not int, it is a dictionnary.
