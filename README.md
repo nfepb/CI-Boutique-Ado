@@ -72,7 +72,8 @@ This is the Code Institute student template for Gitpod.
 9. Adds Totast and Django message to communicate with the user
     * Adds toast folder in templates/includes
     * Updates CSS
-    
+    * Adds if logic to base.html
+    * Updates views for when messages should be displayed
 
 # Deployment
 Django `startproject boutique_ado` steps
