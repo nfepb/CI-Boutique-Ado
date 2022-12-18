@@ -107,6 +107,7 @@
               <a
                 class="remove-item text-danger float-right"
                 id="remove_{{ item.item_id }}"
+                data-product_size="{{ item.size }}"
                 ><small>Remove</small></a
               >
             </td>
@@ -175,7 +176,7 @@
 <script type="text/javascript">
   // Update qty on click
   $(".update-link").click(function (e) {
-    var form = $(this).prev(".update-form");
+    let form = $(this).prev(".update-form");
     form.submit();
   });
 
@@ -184,14 +185,14 @@
     let csrfToken = " {{ csrf_token }}";
     // Splits the itemId of update link being clicked on and taking 2nd half of it
     let itemId = $(this).attr("id").split("remove_")[1];
-    let size = $(this).data("size");
+    let size = $(this).data("product_size");
     let url = `/bag/remove/${itemId}`;
     // Match the CSRF token expected by Django to request.post to server
     let data = {
       // prettier-ignore
       'csrfmiddlewaretoken': csrfToken,
       // prettier-ignore
-      'size': size,
+      'product_size': size,
     };
 
     $.post(url, data).done(function () {
