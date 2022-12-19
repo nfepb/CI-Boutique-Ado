@@ -30,10 +30,48 @@ class Order(models.Model):
         max_digits=10, decimal_places=2, null=False, default=0
         )
 
+# Private number only used within the class --> '__'
+    def __generate_order_number(self):
+        """
+        Generates a random unique 32-string character number  using uuid
+        """
+        return uuid.uuid4().hex.upper()
+
+    def update_total(self):
+        """
+        Updates grand_total each time a line item is added,
+        accounting for delivery cost.
+        """
+        self.order_total = self.lineitems.aggregate(
+            Sum('lineitems_total')
+            )['lineitems_total_sum']
+        if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
+            self.delivery_cost = self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
+        else:
+            self.delivery_cost = 0
+        self.grand_total = self.order_total + self.delivery_cost
+        self.save()
+
+    def save(self, *args, **kwargs):
+        """
+        Overrides the orginal save method to set the order number
+        if it has not been set already.
+        """
+        if not self.order_number:
+            self.order_number = self.__generate_order_number()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.order_number
+
 
 class OrderLineItem(models.Model):
     order = models.ForeignKey(
-        Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems'
+        Order,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='lineitems'
         )
     product = models.ForeignKey(
         Product, null=False, blank=False, on_delete=models.CASCADE
@@ -45,3 +83,14 @@ class OrderLineItem(models.Model):
     lineitem_total = models.DecimalField(
         max_digits=6, decimal_places=2, null=False, blank=False, editable=False
         )
+
+    def save(self, *args, **kwargs):
+        """
+        Overrides the orginal save method to set the lineitem total
+        and updates the order total.
+        """
+        self.lineitem_total = self.product.price * self.product.quantity
+        super().save(*args, **kwargs)
+
+        def __str__(self):
+            return f"SKU {self.product.sku} on order {self.order.order_number}"
