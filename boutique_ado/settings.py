@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'checkout',
 
     # Others
-    'cripsy_forms'
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -81,13 +81,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
                 # Makes the bag contents available through all the site. Acts as view
                 'bag.contexts.bag_contents',
             ],
             # List of built ins that we want available in all our templates by default.
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
-                'crispy_forms.templatetags.crispy_forms_fields',
+                'crispy_forms.templatetags.crispy_forms_field',
             ]
         },
     },
