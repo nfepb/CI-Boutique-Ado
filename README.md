@@ -85,6 +85,8 @@ This is the Code Institute student template for Gitpod.
     * create html based on bag
     * create separate static/css folder with css file for checkout page
     * install django-crispy-forms
+    * Adds crispy forms to installed apps & builtins for load on every template
+    
 
 # Deployment
 Django `startproject boutique_ado` steps
