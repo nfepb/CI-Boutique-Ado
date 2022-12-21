@@ -80,6 +80,11 @@ This is the Code Institute student template for Gitpod.
     * Adds models to admin views
     * Create the order form
     * Add logic that will calculate total each time an items is added or removed.
+    * Create checkout app
+    * create form and view
+    * create html based on bag
+    * create separate static/css folder with css file for checkout page
+    * install django-crispy-forms
 
 # Deployment
 Django `startproject boutique_ado` steps

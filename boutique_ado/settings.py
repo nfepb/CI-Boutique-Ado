@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'products',
     'bag',
     'checkout',
+
+    # Others
+    'cripsy_forms'
 ]
 
 MIDDLEWARE = [
@@ -60,6 +63,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'boutique_ado.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
@@ -79,6 +84,11 @@ TEMPLATES = [
                 # Makes the bag contents available through all the site. Acts as view
                 'bag.contexts.bag_contents',
             ],
+            # List of built ins that we want available in all our templates by default.
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_fields',
+            ]
         },
     },
 ]
