@@ -86,6 +86,10 @@ This is the Code Institute student template for Gitpod.
     * create separate static/css folder with css file for checkout page
     * install django-crispy-forms
     * Adds crispy forms to installed apps & builtins for load on every template
+11. Integration with Stripe
+    * Add JS Script to base.html
+    * Add stripe variables to views.py
+    * Create js file and style cards
     
 
 # Deployment
