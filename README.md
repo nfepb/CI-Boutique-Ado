@@ -90,6 +90,9 @@ This is the Code Institute student template for Gitpod.
     * Add JS Script to base.html
     * Add stripe variables to views.py
     * Create js file and style cards
+    * Install stripe package
+    * Style elements & adds variables to settings
+    * Export STRIPE_PUBLIC_KEY & STRIPE_SECRET_KEY with `export STRIPE_PUBLIC_KEY=XXXXXX`
     
 
 # Deployment
