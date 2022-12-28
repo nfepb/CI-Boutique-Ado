@@ -50,8 +50,12 @@ form.addEventListener("submit", function (ev) {
   // Prevent form default action (here POST)
   ev.preventDefault();
   // Disable card Elem & submit btn to prevent multiple submissions
-  card.update({ disabled: true });
+  // prettier-ignore
+  card.update({ 'disabled': true });
   $("#submit-button").attr("disabled", true);
+  // Display loading animation & fade out form on submit
+  $("#payment-form").fadeToggle(100);
+  $("#loading-overlay").fadeToggle(100);
   // Instead execute this code
   stripe
     // Sends card info securely to Stripe
@@ -69,8 +73,12 @@ form.addEventListener("submit", function (ev) {
                 </span>
                 <span>${result.error.message}</span>`;
         $(errorDiv).html(html);
+        // Fade form on submit
+        $("#payment-form").fadeToggle(100);
+        $("#loading-overlay").fadeToggle(100);
         // If there is an error, re-enable the btns to fix it
-        card.update({ disabled: false });
+        // prettier-ignore
+        card.update({ 'disabled': false });
         $("#submit-button").attr("disabled", false);
       } else {
         if (result.paymentIntent.status === "succeeded") {
