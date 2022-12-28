@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.conf import settings
 
 from .forms import OrderForm
-from .models import OrderLineItem
+from .models import Order, OrderLineItem
 from products.models import Product
 from bag.contexts import bag_contents
 
@@ -25,6 +25,7 @@ def checkout(request):
             'phone_number': request.POST['phone_number'],
             'country': request.POST['country'],
             'postcode': request.POST['postcode'],
+            'town_or_city': request.POST['town_or_city'],
             'street_address_1': request.POST['street_address_1'],
             'street_address_2': request.POST['street_address_2'],
             'county': request.POST['county'],
@@ -33,7 +34,7 @@ def checkout(request):
         order_form = OrderForm(form_data)
         # If form is_valid, save() form
         if order_form.is_valid():
-            order_form.save()
+            order = order_form.save()
             for item_id, item_data in bag.items():
                 try:
                     # Get product ID from bag

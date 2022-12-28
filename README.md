@@ -92,7 +92,9 @@ This is the Code Institute student template for Gitpod.
     * Create js file and style cards
     * Install stripe package
     * Style elements & adds variables to settings
-    * Export STRIPE_PUBLIC_KEY & STRIPE_SECRET_KEY with `export STRIPE_PUBLIC_KEY=XXXXXX`
+    * Export STRIPE_PUBLIC_KEY & STRIPE_SECRET_KEY with `export STRIPE_PUBLIC_KEY=XXXXXX` --> put in env.py file
+    * Adds checkout method to checkout/views.py. Verify in Stripe events that payment intents are "success"
+    * Create checkout_success.html page
     
 
 # Deployment
