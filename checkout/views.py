@@ -9,6 +9,10 @@ import stripe
 
 
 def checkout(request):
+    # Payment intent based on Stripe variables
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
+
     bag = request.session.get('bag', {})
     if not bag:
         message.error(
@@ -20,13 +24,28 @@ def checkout(request):
     total = current_bag['grand_total']
     # Stripe needs amount as integer
     stripe_total = round(total * 100)
+    # Set secret key on Stripe
+    stripe.api_key = stripe_secret_key
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total,
+        currency=settings.STRIPE_CURRENCY,
+    )
+
+    print(intent)
 
     order_form = OrderForm()
+
+    if not stripe_public_key:
+        messages.warning(
+            request, 'Stripe public key is missing. \
+            Did you forget to set it in your environment?'
+            )
+
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
-        'stripe_public_key': 'pk_test_51MHs3yAkzgggt5AOxq5ttOAIsawRyEF6xRdAUwfsOlLNYjaNauPPmTwQCTYWJirPwnrNGbkRzxbpzM14uLizSS3a00pYGFj3DZ',
-        'client_secret': 'myvery_secret_key',
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
     }
 
     return render(request, template, context)
