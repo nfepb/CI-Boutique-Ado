@@ -95,6 +95,9 @@ This is the Code Institute student template for Gitpod.
     * Export STRIPE_PUBLIC_KEY & STRIPE_SECRET_KEY with `export STRIPE_PUBLIC_KEY=XXXXXX` --> put in env.py file
     * Adds checkout method to checkout/views.py. Verify in Stripe events that payment intents are "success"
     * Create checkout_success.html page
+    * Add webhooks to handle events
+    * Create code to create any necessary database objects in the webhook handler
+    * Handle checkbox "save my info"
     
 
 # Deployment
