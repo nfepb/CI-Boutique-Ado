@@ -22,6 +22,7 @@ class StripeWH_Handler:
         Handle a generic/unknown/unexpected webhook event that
         Stripe is sending, returning HTTP response
         """
+        intent = event.data.object
         return HttpResponse(
             content=f'Unhandled webhook received: {event["type"]}',
             status=200

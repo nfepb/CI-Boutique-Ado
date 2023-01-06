@@ -24,11 +24,12 @@ def cache_checkout_data(request):
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        stripe.PaymentIntent(pid, metadata={
-            'bag': json.dumps(request.session.get('bag')),
-            'save_info': request.post.get('save_info'),
+        stripe.PaymentIntent.modify(pid, metadata={
+            'bag': json.dumps(request.session.get('bag', {})),
+            'save_info': request.POST.get('save_info'),
             'username': request.user,
         })
+        return HttpResponse(status=200)
     except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be \
             processed right now. Please try again later.')
@@ -42,6 +43,7 @@ def checkout(request):
 
     if request.method == 'POST':
         bag = request.session.get('bag', {})
+
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -85,7 +87,8 @@ def checkout(request):
                             # In case product is not found:
                 except Product.DoesNotExist:
                     messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
+                        "One of the products in your bag wasn't found in our \
+                            database. "
                         "Please call us for assistance!")
                     )
                     order.delete()
