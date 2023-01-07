@@ -55,7 +55,7 @@ class StripeWH_Handler:
                 shipping_details.address[field] = None
 
         order_exists = False
-        attempt = 1	
+        attempt = 1
         while attempt <= 5:
             try:
                 # Check if order exists in database based on fields
@@ -76,11 +76,16 @@ class StripeWH_Handler:
                 order_exists = True
                 break
             except Order.DoesNotExist:
+                """
+                If order not found, increment attempt by 1 & sleep 1 second.
+                Will try to find the order 5 times over 5 seconds.
+                """
                 attempt += 1
                 time.sleep(1)
         if order_exists:
             return HttpResponse(
-                    content=f'Webhook received: {event:["type"]} | SUCCESS: Verified order already in database',
+                    content=f'Webhook received: {event:["type"]} \
+                        | SUCCESS: Verified order already in database',
                     status=200
                 )
 
@@ -132,7 +137,8 @@ class StripeWH_Handler:
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
         return HttpResponse(
-            content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
+            content=f'Webhook received: {event["type"]} \
+                | SUCCESS: Created order in webhook',
             status=200)
 
     def handle_payment_intent_payment_failed(self, event):

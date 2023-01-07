@@ -98,6 +98,7 @@ This is the Code Institute student template for Gitpod.
     * Add webhooks to handle events
     * Create code to create any necessary database objects in the webhook handler
     * Handle checkbox "save my info"
+    * Deal with cache and introduce dealy to have clean DB and avoid mistakes/errors
     
 
 # Deployment
