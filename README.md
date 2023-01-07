@@ -99,6 +99,7 @@ This is the Code Institute student template for Gitpod.
     * Create code to create any necessary database objects in the webhook handler
     * Handle checkbox "save my info"
     * Deal with cache and introduce dealy to have clean DB and avoid mistakes/errors
+    * Updates Order model for unique identification when going over webhook_handler cache loop --> allows user to order the same order and not being created.
     
 
 # Deployment

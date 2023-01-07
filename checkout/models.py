@@ -29,7 +29,11 @@ class Order(models.Model):
     grand_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0
         )
-    original_bag
+    # Make order unique for Success_payment loop in webhook_handlers
+    original_bag = models.TextField(null=False, blank=False, default='')
+    stripe_pid = models.CharField(
+        max_length=254, null=False, blank=False, default=''
+        )
 
 # Private number only used within the class --> '__'
     def _generate_order_number(self):
