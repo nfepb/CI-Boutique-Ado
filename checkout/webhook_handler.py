@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Order, OrderLineItem
 from products.models import Product
 
+import stripe
 import json
 import time
 
@@ -48,9 +49,9 @@ class StripeWH_Handler:
             intent.latest_charge
         )
 
-        billing_details = intent.charges.data[0].billing_details
+        billing_details = stripe_charge.billing_details
         shipping_details = intent.shipping
-        grand_total = round(intent.charges.data[0].amount / 100, 2)
+        grand_total = round(stripe_charge.amount / 100, 2)
 
         """
         Replace empty strings with 'None'
@@ -72,8 +73,8 @@ class StripeWH_Handler:
                     country__iexact=shipping_details.address.country,
                     postcode__iexact=shipping_details.address.postal_code,
                     town_or_city__iexact=shipping_details.address.city,
-                    street_address1__iexact=shipping_details.address.line1,
-                    street_address2__iexact=shipping_details.address.line2,
+                    street_address_1__iexact=shipping_details.address.line1,
+                    street_address_2__iexact=shipping_details.address.line2,
                     county__iexact=shipping_details.address.state,
                     grand_total=grand_total,
                     original_bag=bag,
@@ -90,8 +91,7 @@ class StripeWH_Handler:
                 time.sleep(1)
         if order_exists:
             return HttpResponse(
-                    content=f'Webhook received: {event:["type"]} \
-                        | SUCCESS: Verified order already in database',
+                    content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
                     status=200
                 )
 
@@ -107,8 +107,8 @@ class StripeWH_Handler:
                     country=shipping_details.address.country,
                     postcode=shipping_details.address.postal_code,
                     town_or_city=shipping_details.address.city,
-                    street_address1=shipping_details.address.line1,
-                    street_address2=shipping_details.address.line2,
+                    street_address_1=shipping_details.address.line1,
+                    street_address_2=shipping_details.address.line2,
                     county=shipping_details.address.state,
                     original_bag=bag,
                     stripe_pid=pid,
