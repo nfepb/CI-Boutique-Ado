@@ -101,6 +101,9 @@ This is the Code Institute student template for Gitpod.
     * Deal with cache and introduce dealy to have clean DB and avoid mistakes/errors
     * Updates Order model for unique identification when going over webhook_handler cache loop --> allows user to order the same order and not being created.
 12. Profile App - User Stories 10 - personalized user profile
+    * Installs Django Country picklist with `pip3 install django-countries==7.2.1`
+    * Creates profiles app with `python3 manage.py startapp profiles` & add to settings installed apps
+    * Create user model & relationship to other objects (order)
     
 
 # Deployment
