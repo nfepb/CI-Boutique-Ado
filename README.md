@@ -109,6 +109,7 @@ This is the Code Institute student template for Gitpod.
     * Creates html & css files.
     * Modifies allauth/base & allauth/account/base templates
     * Updates CSS
+    * Fix superuser login by creating an associated profile
     
 
 # Deployment
