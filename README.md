@@ -104,6 +104,10 @@ This is the Code Institute student template for Gitpod.
     * Installs Django Country picklist with `pip3 install django-countries==7.2.1`
     * Creates profiles app with `python3 manage.py startapp profiles` & add to settings installed apps
     * Create user model & relationship to other objects (order)
+    * Updates urls 
+    * Creates the views for userprofile
+    * Creates html & css files.
+    * Modifies allauth/base & allauth/account/base templates
     
 
 # Deployment
