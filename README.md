@@ -110,6 +110,8 @@ This is the Code Institute student template for Gitpod.
     * Modifies allauth/base & allauth/account/base templates
     * Updates CSS
     * Fix superuser login by creating an associated profile
+    * Creates forms.py from checkout/forms.py
+    * update views.py with form info
     
 
 # Deployment
