@@ -112,6 +112,7 @@ This is the Code Institute student template for Gitpod.
     * Fix superuser login by creating an associated profile
     * Creates forms.py from checkout/forms.py
     * update views.py with form info
+    * add js for countryfield
     
 
 # Deployment

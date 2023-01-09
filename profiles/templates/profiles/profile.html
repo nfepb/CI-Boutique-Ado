@@ -33,7 +33,7 @@
         method="post"
         id="profile-update-form"
       >
-        {%csrf_token %}{{ form|crispy }}
+        {% csrf_token %}{{ form|crispy }}
         <button class="btn btn-black rounded-0 text-uppercase float-right">
           Update Information
         </button>
@@ -44,5 +44,10 @@
       {{ orders }}
     </div>
   </div>
-  {{ profile }} {% endblock %}
 </div>
+{% endblock %} {% block postloadjs %} {{ block.super }}
+<script
+  type="text/javascript"
+  src="{% static 'profiles/js/countryfield.js' %}"
+></script>
+{% endblock %}
