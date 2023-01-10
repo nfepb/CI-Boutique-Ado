@@ -113,6 +113,7 @@ This is the Code Institute student template for Gitpod.
     * Creates forms.py from checkout/forms.py
     * update views.py with form info
     * add js for countryfield
+    * Update order history display on profile.html
     
 
 # Deployment
