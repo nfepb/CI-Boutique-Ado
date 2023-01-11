@@ -2,6 +2,7 @@ from django.http import HttpResponse
 
 from .models import Order, OrderLineItem
 from products.models import Product
+from profiles.models import UserProfile
 
 import stripe
 import json
@@ -61,6 +62,23 @@ class StripeWH_Handler:
             if value == "":
                 shipping_details.address[field] = None
 
+        # Update profile information if save_info was checked
+        # Profile set to 'None' for anonymous users to work
+        profile = None
+        username = intent.metadata.username
+        if username != 'AnonymousUser':
+            profile = UserProfile.objects.get(user__username=username)
+            # Update info if box checked
+            if save_info:
+                profile.default_phone_number = shipping_details.phone
+                profile.default_country = shipping_details.address.country
+                profile.default_postcode = shipping_details.address.postal_code
+                profile.default_town_or_city = shipping_details.address.city
+                profile.default_street_address_1 = shipping_details.address.line1
+                profile.default_street_address_2 = shipping_details.address.line2
+                profile.default_county = shipping_details.address.state
+                profile.save()
+
         order_exists = False
         attempt = 1
         while attempt <= 5:
@@ -102,6 +120,10 @@ class StripeWH_Handler:
                 # iterate through items in bag from json instead of session
                 order = Order.objects.create(
                     full_name=shipping_details.name,
+                    # Add user_profile info to order when profile=None
+                    # Allow webhook handler to create order for auth users by
+                    # attaching to profile
+                    user_profile=profile,
                     email=billing_details.email,
                     phone_number=shipping_details.phone,
                     country=shipping_details.address.country,
