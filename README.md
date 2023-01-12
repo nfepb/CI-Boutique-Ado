@@ -115,6 +115,9 @@ This is the Code Institute student template for Gitpod.
     * add js for countryfield
     * Update order history display on profile.html
     * Adds confirmation email in webhook handler because this is where we know where the payment took place.
+    * `export STRIPE_WH_KEY="" ` + check site URL to make sure the url is the same as webhook URL Stripe: `https://8000-nfepb-ciboutiqueado-e69p4pes8p1.ws-eu82.gitpod.io/checkout/wh/`
+13. Provide additional functionalities to our users & superusers
+    * Create forms.py in products app.
     
 
 # Deployment
