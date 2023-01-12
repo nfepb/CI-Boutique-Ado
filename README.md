@@ -114,6 +114,7 @@ This is the Code Institute student template for Gitpod.
     * update views.py with form info
     * add js for countryfield
     * Update order history display on profile.html
+    * Adds confirmation email in webhook handler because this is where we know where the payment took place.
     
 
 # Deployment
