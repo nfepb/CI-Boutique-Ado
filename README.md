@@ -118,6 +118,9 @@ This is the Code Institute student template for Gitpod.
     * `export STRIPE_WH_KEY="" ` + check site URL to make sure the url is the same as webhook URL Stripe: `https://8000-nfepb-ciboutiqueado-e69p4pes8p1.ws-eu82.gitpod.io/checkout/wh/`
 13. Provide additional functionalities to our users & superusers
     * Create forms.py in products app.
+    * Create html page to add_product
+    * Add success & fail messages for product add and profile update
+    * Add noimage in toast_success.html & 
     
 
 # Deployment
