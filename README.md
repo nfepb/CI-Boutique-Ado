@@ -120,7 +120,7 @@ This is the Code Institute student template for Gitpod.
     * Create forms.py in products app.
     * Create html page to add_product
     * Add success & fail messages for product add and profile update
-    * Add noimage in toast_success.html & 
+    * Add noimage in toast_success.html & templates/toast/toast_success & bag
     
 
 # Deployment
