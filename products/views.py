@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Product, Category
@@ -87,8 +88,14 @@ def product_detail(request, product_id):
     return render(request, 'products/product_detail.html', context)
 
 
+# Checks if user is logged in before executing the view or redirect to login \
+# page with decorator
+@login_required
 def add_product(request):
     """ Add a product to the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+
     if request.method == 'POST':
         # Capture both form and image if submitted also
         form = ProductForm(request.POST, request.FILES)
@@ -112,8 +119,12 @@ def add_product(request):
     return render(request, template, context)
 
 
+@login_required
 def edit_product(request, product_id):
     """ Edit a product in the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+
     # Get prefilled form
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
@@ -138,8 +149,12 @@ def edit_product(request, product_id):
     return render(request, template, context)
 
 
+@login_required
 def delete_product(request, product_id):
     """ Delete a product from the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
     messages.success(request, 'Product deleted!')

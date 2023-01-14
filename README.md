@@ -122,7 +122,9 @@ This is the Code Institute student template for Gitpod.
     * Add success & fail messages for product add and profile update
     * Add noimage in toast_success.html & templates/toast/toast_success & bag
     * Create edit_product.html, update views & url to allow modification of product listing
-    * Add URL in products/url to allow deletion of products.
+    * Add URL in products/url to allow deletion of products & link for action on product_details page & product templates.
+    * Updates security to avoid users to post of edit products without propoer accreditation
+        * imports login_required decorator in product & profile views
     
 
 # Deployment
