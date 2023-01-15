@@ -126,6 +126,7 @@ This is the Code Institute student template for Gitpod.
     * Updates security to avoid users to post of edit products without propoer accreditation
         * imports login_required decorator in product & profile views
     * Creates CustomClearableFileInput widget in products for better UI when uploading a product image.
+    * Improves UI for image field in edit product pages.
     
 
 # Deployment
