@@ -24,7 +24,16 @@
         class="form mb-2"
         enctype="multipart/form-data"
       >
-        {% csrf_token %} {{ form | crispy }}
+        {% csrf_token %}
+        <!-- Display field label only if not specific label field -->
+        {% for field in form %}
+        <!-- prettier-ignore -->
+        {% if field.name != 'image' %}
+          {{ field | as_crispy_field }}
+        {% else %}
+          {{ field }}
+        {% endif %} 
+        {% endfor %}
         <div class="text-right">
           <a class="btn btn-outline-black rounded-0" href="{% url 'products' %}"
             >Cancel</a
