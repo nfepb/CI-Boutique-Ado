@@ -127,6 +127,85 @@ This is the Code Institute student template for Gitpod.
         * imports login_required decorator in product & profile views
     * Creates CustomClearableFileInput widget in products for better UI when uploading a product image.
     * Improves UI for image field in edit product pages.
+14. Deployment
+    * Create an external database. For this we’ll use ElephantSQL, as the Heroku add-ons are not available on the Student Pack.
+        1. start by creating a database and connecting it to a new app on Heroku. We will also connect it to our Gitpod workspace temporarily so we can make migrations.
+        2. log in to ElephantSQL.com
+        3. Click on 'Create New Instance'
+        4. Select plan
+        5. Define project name.
+        6. Select plan Tiny Turtle (Free)
+        7. Select the region for deployment.
+        8. Click on 'Review'.
+        9. Check details and click on 'Create instance'.
+        10. From the ElephantSQL dashboard, click on the database instance for the project.
+        11. Copy the database URL.
+    * Create an app on Heroku, as we have done for previous projects.
+        1. Click on 'New' to create a new app.
+        2. Define the name for the app & select the region the closest.
+        3. In the app's settings, add the config vars:
+            - `DATABASE_URL`: the value is the URL instance link from ElephantSQL.
+        4. Prepare the local project for migration.
+            - In the terminal, install dj_database_url and psycopg2, both of these are needed to connect to the external database: `pip3 install dj_database_url==0.5.0 psycopg2`
+            - Update the requirements.txt file with the newly installed packages: `pip freeze > requirements.txt`
+            - In your settings.py file, import dj_database_url underneath the import for os: 
+                ` import os
+                import dj_database_url`
+        5. In the DATABASES section and update it to: 
+            <code># DATABASES = {
+                #     'default': {
+                #         'ENGINE': 'django.db.backends.sqlite3',
+                #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+                #     }
+                # }
+                    
+                DATABASES = {
+                    'default': dj_database_url.parse('your-database-url-here')
+                }
+            </code>
+            so that the original connection to sqlite3 is commented out and we connect to the new ElephantSQL database instead. Paste in your ElephantSQL database URL in the position indicated.
+            /!\ DO NOT commit this file with your database string in the code, this is temporary so that we can connect to the new database and make migrations. We will remove it in a moment.
+        6. In the terminal, run the showmigrations command to confirm you are connected to the external database:<br>
+            `python3 manage.py showmigrations`
+        7. Migrate your database models to your new database<br>
+            `python3 manage.py migrate`
+            - Load in the fixtures. Please note the order is very important here. We need to load categories first<br>
+            `python3 manage.py loaddata categories`
+            - Then products, as the products require a category to be set<br>
+            `python3 manage.py loaddata products`
+            - Create a superuser for the new database<br>
+            `python3 manage.py createsuperuser`
+        8. Finally, to prevent exposing our database when we push to GitHub, we will delete it again from our settings.py - we’ll set it up again using an environment variable in the next video - and reconnect to our local sqlite database. For now, your DATABASE setting in the settings.py file should look like this
+        <code>
+            DATABASES = {
+                'default': {
+                    'ENGINE': 'django.db.backends.sqlite3',
+                    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+                }
+            }</code>
+        9. Let’s confirm that the data in your database on ElephantSQL has been created. On the ElephantSQL page for your database, in the left side navigation, select “BROWSER”.
+        10. Click the Table queries button, select auth_user.
+        11. When you click “Execute”, you should see your newly created superuser details displayed. This confirms your tables have been created and you can add data to your database.
+    * Deploy to Heroku
+        1. Modify DATABASE_URL in settings.py based on where the app is ran:<br>
+        <code>if 'DATABASE_URL' is os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+            }
+        else:
+            DATABASES = {
+                'default': {
+                    'ENGINE': 'django.db.backends.sqlite3',
+                    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+                }
+            }
+            </code>
+                2. Install gunicorn to act as webserver: `pip3 install gunicorn` & freeze in requirements file with `pip3 freeze >requirement.txt`.
+                3. Create Profile to tell Heroku to create a web dynoand add: `web: gunicorn boutique_ado.wsgi:application` to run Gunicorn and will run our Django app.
+                4. Login to Heroku with `heroku login`
+                5. Disable collectstatic for deployment to Heroku: `heroku config: set DISABLE_COLLECTSTATIC=1 --app [name-of-your-app-in-heroku]`
+                6. In settings.py, add `'localhost'` & `'[location-of-your-app-in-heroku]'`.
+    * Set up hosting for our static and media files with AWS (Amazon Web Services). Specifically, we will use S3 (“Simple Storage Service”) for this.
     
 
 # Deployment
