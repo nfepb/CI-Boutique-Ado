@@ -202,7 +202,8 @@ This is the Code Institute student template for Gitpod.
             </code>
                 2. Install gunicorn to act as webserver: `pip3 install gunicorn` & freeze in requirements file with `pip3 freeze >requirement.txt`.
                 3. Create Profile to tell Heroku to create a web dynoand add: `web: gunicorn boutique_ado.wsgi:application` to run Gunicorn and will run our Django app.
-                4. Login to Heroku with `heroku login`
+                4. Login to Heroku with `heroku login -i`
+                5. Initialize heroku git remote with `heroku git:remote -a [yourgitreponame]`
                 5. Disable collectstatic for deployment to Heroku: `heroku config: set DISABLE_COLLECTSTATIC=1 --app [name-of-your-app-in-heroku]`
                 6. In settings.py, add `'localhost'` & `'[location-of-your-app-in-heroku]'`.
     * Set up hosting for our static and media files with AWS (Amazon Web Services). Specifically, we will use S3 (“Simple Storage Service”) for this.
