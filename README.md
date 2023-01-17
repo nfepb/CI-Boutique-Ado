@@ -206,7 +206,37 @@ This is the Code Institute student template for Gitpod.
                 5. Initialize heroku git remote with `heroku git:remote -a [yourgitreponame]`
                 5. Disable collectstatic for deployment to Heroku: `heroku config: set DISABLE_COLLECTSTATIC=1 --app [name-of-your-app-in-heroku]`
                 6. In settings.py, add `'localhost'` & `'[location-of-your-app-in-heroku]'`.
+                7. Deploy to heroku with `git push heroku main:main`
+                8. Define secret key through https://miniwebtool.com/django-secret-key-generator/ and add it to config vars in heroku. Update the secret_key in settings to `SECRET_KEY = os.environ.get('SECRET_KEY', '')` and DEBUG to `'DEVELOPMENT' in os.environ`
     * Set up hosting for our static and media files with AWS (Amazon Web Services). Specifically, we will use S3 (“Simple Storage Service”) for this.
+    [File set up AWS](https://codeinstitute.s3.amazonaws.com/fullstack/AWS%20changes%20sheet.pdf)
+        1. Create bucket in AWS - use same name as heroku app name.
+        2. Make bucket public
+        3. Create bucket
+        4. In the properties of the bucket, enable Static Website Hosting. Index documents.
+        5. In the permission tab:
+            - In the Cross-origin resource sharing (CORS) of the CORS, set up the required access between Heroku & this S3 buckets, add: <br>
+            <code>[
+  `{
+      "AllowedHeaders": [
+          "Authorization"
+      ],
+      "AllowedMethods": [
+          "GET"
+      ],
+      "AllowedOrigins": [
+          "*"
+      ],
+      "ExposeHeaders": []
+  }
+]`
+</code>
+        6. Define IAM in AWS. Create Group and name it `manage-boutique-ado`.
+        7. Follow steps in [CI video](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+EA101+2021_T1/courseware/eb05f06e62c64ac89823cc956fcd8191/40cc2543c48643fda09351da6fa90579/?child=first) & in [doc](https://codeinstitute.s3.amazonaws.com/fullstack/AWS%20changes%20sheet.pdf)
+        8. Connect to AWS by installing packages `pip3 install boto3` & `pip3 install django-storages` & add storages to installed apps. Freeze the requirements.
+        9. Update the settings.py file l.188 > 192 & add AWS secret keys to heroku config vars. Add also `USE_AWS` and set it to `True`. Remove the `COLLECTSTATIC` config as Django will automatically upload them to S3
+        10. Create custom_storages.py file and import settings & S3Boto3storage
+        11. In the settings, define the classes to be used from the custom_storage.py file.
     
 
 # Deployment
