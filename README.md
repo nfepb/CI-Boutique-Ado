@@ -239,7 +239,9 @@ This is the Code Institute student template for Gitpod.
         11. In the settings, define the classes to be used from the custom_storage.py file.
         12. In the settings, define the cache control with `AWS_S3_OBJECT_PARAMETERS`
     15. Sending emails with Django
-        
+        * Set up 2 steps auth in Gmail
+        * Update EMAIL vars in Heroku
+    16. Refactoring
     
 
 # Deployment
