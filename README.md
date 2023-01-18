@@ -237,6 +237,7 @@ This is the Code Institute student template for Gitpod.
         9. Update the settings.py file l.188 > 192 & add AWS secret keys to heroku config vars. Add also `USE_AWS` and set it to `True`. Remove the `COLLECTSTATIC` config as Django will automatically upload them to S3
         10. Create custom_storages.py file and import settings & S3Boto3storage
         11. In the settings, define the classes to be used from the custom_storage.py file.
+        12. In the settings, define the cache control with `AWS_S3_OBJECT_PARAMETERS`
     
 
 # Deployment
