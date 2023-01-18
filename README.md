@@ -238,6 +238,8 @@ This is the Code Institute student template for Gitpod.
         10. Create custom_storages.py file and import settings & S3Boto3storage
         11. In the settings, define the classes to be used from the custom_storage.py file.
         12. In the settings, define the cache control with `AWS_S3_OBJECT_PARAMETERS`
+    15. Sending emails with Django
+        
     
 
 # Deployment
