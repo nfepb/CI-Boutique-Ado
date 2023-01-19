@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import handler404
 
 
 urlpatterns = [
@@ -28,3 +29,7 @@ urlpatterns = [
     path('checkout/', include('checkout.urls')),
     path('profile/', include('profiles.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# find and call the handler404 function when a user tries to navigate
+# to a URL that does not exist (from Views file).
+handler404 = 'boutique_ado.views.handler404'
