@@ -242,6 +242,8 @@ This is the Code Institute student template for Gitpod.
         * Set up 2 steps auth in Gmail
         * Update EMAIL vars in Heroku
     16. Refactoring
+
+1. [Keyword Research](/assets/images/keyword-research.png)
     
 
 # Deployment
