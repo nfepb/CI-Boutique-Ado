@@ -52,7 +52,7 @@ def bag_contents(request):
     else:
         delivery = 0
         free_delivery_delta = 0
-    
+
     grand_total = delivery + total
 
 # Make items available throughout the app
